@@ -1,8 +1,9 @@
 import socket
 import threading
+import argparse
 
 class ChatClient:
-    def __init__(self, host='127.0.0.1', port=7675):
+    def __init__(self, host='chat.novlab.org', port=7675):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect((host, port))
         
@@ -53,6 +54,10 @@ class ChatClient:
             print (message)
             self.client.send(message.encode('utf-8'))
         
-
 if __name__ == "__main__":
-    client = ChatClient()
+    parser = argparse.ArgumentParser(description="SuperChat Client")
+    parser.add_argument('host', help="The server host to connect to")
+    parser.add_argument('port', type=int, help="The server port to connect to")
+    args = parser.parse_args()
+
+    client = ChatClient(args.host, args.port)
