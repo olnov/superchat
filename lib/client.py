@@ -2,7 +2,7 @@ import socket
 import threading
 
 class ChatClient:
-    def __init__(self, host='127.0.0.1', port=7675):
+    def __init__(self, host='chat.novlab.org', port=7675):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect((host, port))
 
